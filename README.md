@@ -46,14 +46,14 @@ void loop() {
   btnValue = digitalRead(joyBTN);
 
   posX = map(xRead, 0, 1023, 0, 16);
-  posY = map(yRead, 0, 1023, 0, 2); 
+  posY = map(yRead, 0, 1023, 0, 2);
 
   
   if (posX != lastX || posY != lastY) {
     lcd.setCursor(lastX, lastY);
     lcd.print(' '); 
 
-    
+
     lcd.setCursor(posX, posY);
     lcd.print('.');
 
@@ -61,8 +61,8 @@ void loop() {
     lastY = posY;
   }
 
-  
-  if (btnValue == LOW && btnState == HIGH) {
+
+  if (btnValue == LOW && btnState == HIGH) { // button pushed only one time
     count++;
 
     if (count == 1) {
@@ -86,20 +86,20 @@ void loop() {
 
   btnState = btnValue;
   
-  
-  if (count >= 1) {
+
+  if (count >= 1) { // point 1
     lcd.setCursor(p1[0], p1[1]);
     lcd.print('.');
   }
-  if (count >= 2) {
+  if (count >= 2) { // point 2
     lcd.setCursor(p2[0], p2[1]);
     lcd.print('.');
   }
-  if (count >= 3) {
+  if (count >= 3) { // point 3
     lcd.setCursor(p3[0], p3[1]);
     lcd.print('.');
   }
-  if (count >= 4) {
+  if (count >= 4) { // point 4
     lcd.setCursor(p4[0], p4[1]);
     lcd.print('.');
   }
@@ -109,7 +109,7 @@ void loop() {
     lcd.clear();
   }
 
-  if (count == 4){
+  if (count == 4){ // Start check if was square
 
     byte points[4][2] = {
       {x1, y1},
@@ -136,6 +136,7 @@ void loop() {
       }
     }
 
+    // Check columns
     for (byte i=0; i<4; i++){
       byte x = points[i][0];
 
