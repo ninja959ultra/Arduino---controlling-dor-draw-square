@@ -46,14 +46,14 @@ void loop() {
   btnValue = digitalRead(joyBTN);
 
   posX = map(xRead, 0, 1023, 0, 16);
-  posY = map(yRead, 0, 1023, 0, 2);  // تعديل ليلائم الأبعاد في الشاشة (16x2)
+  posY = map(yRead, 0, 1023, 0, 2); 
 
-  // إذا تغيرت الإحداثيات
+  
   if (posX != lastX || posY != lastY) {
     lcd.setCursor(lastX, lastY);
-    lcd.print(' ');  // مسح النقطة السابقة
+    lcd.print(' '); 
 
-    // طباعة النقطة الجديدة
+    
     lcd.setCursor(posX, posY);
     lcd.print('.');
 
@@ -61,7 +61,7 @@ void loop() {
     lastY = posY;
   }
 
-  // معالجة الضغط على الزر وتخزين النقاط
+  
   if (btnValue == LOW && btnState == HIGH) {
     count++;
 
@@ -86,7 +86,7 @@ void loop() {
 
   btnState = btnValue;
   
-  // طباعة النقاط المخزنة
+  
   if (count >= 1) {
     lcd.setCursor(p1[0], p1[1]);
     lcd.print('.');
