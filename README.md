@@ -11,7 +11,11 @@ int joyX = A1;
 int joyY = A0;
 byte joyBTN = 2;
 
+byte numberDotInRow = 0;
+byte numberDotInCol = 0;
 byte count = 0;
+byte posX = 0;
+byte posY = 0;
 
 bool btnState = HIGH;
 
@@ -21,13 +25,22 @@ byte p3[2];
 byte p4[2];
 int xRead;
 int yRead;
-byte posX = 0;
-byte posY = 0;
 int btnValue;
 int lastX;
 int lastY;
 
+
+byte x1;
+byte x2;
+byte x3;
+byte x4;
+byte y1;
+byte y2;
+byte y3;
+byte y4;
+
 void setup() {
+  Serial.begin(9600);
   pinMode(joyBTN, INPUT_PULLUP);
   lcd.init();
   lcd.backlight();
@@ -79,32 +92,109 @@ void loop() {
 
   }
 
-    btnState = btnValue;
-    
-    // طباعة النقاط المخزنة
-    if (count >= 1) {
-      lcd.setCursor(p1[0], p1[1]);
-      lcd.print('.');
-    }
-    if (count >= 2) {
-      lcd.setCursor(p2[0], p2[1]);
-      lcd.print('.');
-    }
-    if (count >= 3) {
-      lcd.setCursor(p3[0], p3[1]);
-      lcd.print('.');
-    }
-    if (count >= 4) {
-      lcd.setCursor(p4[0], p4[1]);
-      lcd.print('.');
+  btnState = btnValue;
+  
+  // طباعة النقاط المخزنة
+  if (count >= 1) {
+    lcd.setCursor(p1[0], p1[1]);
+    lcd.print('.');
+  }
+  if (count >= 2) {
+    lcd.setCursor(p2[0], p2[1]);
+    lcd.print('.');
+  }
+  if (count >= 3) {
+    lcd.setCursor(p3[0], p3[1]);
+    lcd.print('.');
+  }
+  if (count >= 4) {
+    lcd.setCursor(p4[0], p4[1]);
+    lcd.print('.');
+  }
+
+  if (count == 5) {
+    count = 0;
+    lcd.clear();
+  }
+
+  if (count == 4){
+
+    byte points[4][2] = {
+      {x1, y1},
+      {x2, y2},
+      {x3, y3},
+      {x4, y4},
+    };
+
+    points[0][0] = p1[0];
+    points[0][1] = p1[1];
+    points[1][0] = p2[0];
+    points[1][1] = p2[1];
+    points[2][0] = p3[0];
+    points[2][1] = p3[1];
+    points[3][0] = p4[0];
+    points[3][1] = p4[1];
+
+    // Check row
+    for (byte i=0; i<4; i++){
+      byte y = points[i][1];
+
+      if (y == 0) {
+        numberDotInRow += 1;
+      }
     }
 
-    if (count == 5) {
-      count = 0;
-      lcd.clear();
+    for (byte i=0; i<4; i++){
+      byte x = points[i][0];
+
+      for (byte z=0; z<4; z++) {
+        byte athorX = points[z][0];
+
+        if (x == athorX){
+          numberDotInCol++;
+        }
+      }
+
     }
+
+
+    // check if square
+    if (numberDotInRow == 2 && numberDotInCol == 8) {
+      Serial.println("correct");
+      byte x1ForDis = points[0][0];
+      byte x2ForDis;
+
+      for (byte i=0; i<4; i++){
+        byte x = points[i][0];
+        if (x != x1ForDis){
+          x2ForDis = x;
+        }
+      }
+
+      byte distance = abs(x1ForDis - x2ForDis) - 1;
+
+      byte xMax = max(x1ForDis, x2ForDis);
+      byte xMin = min(x1ForDis, x2ForDis);
+
+      for (byte i = xMin + 1; i<xMax; i++){
+        lcd.setCursor(i, 0);
+        lcd.print('.');
+      }
+      for (byte i = xMin + 1; i<xMax; i++){
+        lcd.setCursor(i, 1);
+        lcd.print('.');
+      }
+
+      Serial.print(distance);
+      
+    }
+
+    numberDotInRow = 0;
+    numberDotInCol = 0;
+
+  }
+  
 
   delay(50);
 }
-
 ```
