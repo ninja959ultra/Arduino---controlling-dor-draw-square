@@ -23,21 +23,13 @@ byte p1[2];
 byte p2[2];
 byte p3[2];
 byte p4[2];
-int xRead;
-int yRead;
 int btnValue;
-int lastX;
-int lastY;
 
+int xRead, yRead;
+int lastX, lastY;
 
-byte x1;
-byte x2;
-byte x3;
-byte x4;
-byte y1;
-byte y2;
-byte y3;
-byte y4;
+byte x1, x2, x3, x4, y1, y2, y3, y4;
+
 
 void setup() {
   Serial.begin(9600);
@@ -197,4 +189,5 @@ void loop() {
 
   delay(50);
 }
+
 ```
