@@ -1,6 +1,31 @@
 # Arduino---controlling-dor-draw-square
 
 
+# Description:
+Arduino---Joystick-Square-Drawing-Challenge on LCD
+
+This project is a creative challenge using an Arduino, a joystick module, and an LCD display.
+
+A dot is displayed on the screen and controlled using the joystick.
+
+When the joystick button is pressed, a dot is placed at the current location.
+
+The goal is to draw a square or rectangle by placing four points that form a valid shape.
+
+If the placed points form a square or rectangle, the shape is automatically completed by connecting the points.
+
+If the four points do not form a valid shape, nothing happens.
+
+Pressing the joystick button for the fifth time will clear the screen and reset the challenge.
+
+
+This project encourages precision, spatial thinking, and interaction with basic electronics in a fun and engaging way.
+
+
+# Pictures:
+
+
+
 # Code Below:
 ```cpp
 #include <LiquidCrystal_I2C.h>
