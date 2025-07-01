@@ -23,7 +23,9 @@ This project encourages precision, spatial thinking, and interaction with basic 
 
 
 # Pictures:
-![img1]()
+![img1](Aruino_project_controlling_dot_draw_square_PART1.jpeg)
+![img2](Aruino_project_controlling_dot_draw_square_PART2.jpeg)
+![img3](Aruino_project_controlling_dot_draw_square_PART3.jpeg)
 
 
 # Code Below:
